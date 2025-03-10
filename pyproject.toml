@@ -33,7 +33,7 @@ flask-sqlalchemy = "2.5.1"
 mysql-connector-python = "^9.0.0"
 sqlalchemy = "1.4.54"
 flake8 = "^7.1.1"
-apache-airflow = "^2.10.5"
+apache-airflow = {extras = ["cncf-kubernetes"], version = "^2.10.5"}
 
 [tool.poetry.group.jupyter.dependencies]
 matplotlib = "^3.9.2"

@@ -6,6 +6,9 @@
 
 >`airflow webserver`
 
+username: airflow\
+password: airflow
+
 ### Tutorial Commands
 
 *Running the script*
