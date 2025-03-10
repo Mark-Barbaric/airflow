@@ -22,3 +22,10 @@ def accepts(*types):
             return f(*args, **kwargs)
         return new_f
     return _check_accepts
+
+
+def multiplier_decorator(func, a: int):
+    @functools.wraps(func)
+    def _wrapper(a):
+        func(a)
+    return _wrapper
