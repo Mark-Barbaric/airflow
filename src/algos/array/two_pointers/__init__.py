@@ -1,1 +1,0 @@
-from .squares_of_sorted_array import return_squares
