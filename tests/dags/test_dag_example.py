@@ -1,9 +1,7 @@
-"""Example DAGs test. This test ensures that all Dags have tags, retries set to two, and no import errors. This is an example pytest and may not be fit the context of your DAGs. Feel free to add and remove tests."""
-
 import os
 import logging
-from contextlib import contextmanager
 import pytest
+from contextlib import contextmanager
 from airflow.models import DagBag
 
 
@@ -41,9 +39,10 @@ def get_dags(excluding: list[str]=[]):
     with suppress_logging("airflow"):
         dag_bag = DagBag(include_examples=False)
 
-    def strip_path_prefix(path):
+    
+    def strip_path_prefix(path: str):
         return os.path.relpath(path, os.environ.get("AIRFLOW_HOME"))
-
+    stripped_file_path = [(k, v, strip_path_prefix(v.fileloc)) for k, v in dag_bag.items()]
     return [(k, v, strip_path_prefix(v.fileloc)) for k, v in dag_bag.dags.items() if k not in excluding]
 
 
@@ -72,7 +71,7 @@ def test_dag_tags(dag_id, dag, fileloc):
 
 
 @pytest.mark.parametrize(
-    "dag_id,dag, fileloc", get_dags(excluding=["fundamental_concepts.py"]), ids=[x[2] for x in get_dags()]
+    "dag_id,dag, fileloc", get_dags(excluding=["airflow_fundamental_concepts.py"]), ids=[x[2] for x in get_dags()]
 )
 def test_dag_retries(dag_id, dag, fileloc):
     """
