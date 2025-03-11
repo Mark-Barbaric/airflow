@@ -1,29 +1,67 @@
-<<<<<<< Updated upstream
-# general-python
+# Airflow and Astro
 
-![Code Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Mark-Barbaric/d52efd902ac81cfcfd6248ffe036462c/raw/covbadge.json)
+Purpose of this repo is to combine the tutorials from the Airflow and Astro websites.
 
-## algos
-### array
-### binary_search
-### general
-### graphs
-### linked_list
-### monotonic_stack
-### trees
-
-## data structures
-### graphs
-### trees
-
-## general python
-### decorators
-
-## system_design
-### messaging
-- pub_sub 
-=======
-# Airflow
+## Fundamentals
 
 Various tutorials and exercises related to airflow.
->>>>>>> Stashed changes
+
+## Fundamental Concepts
+
+### Using Astro CLI
+
+Installation
+
+>`https://www.astronomer.io/docs/astro/cli/install-cli/?tab=linux#install-the-astro-cli`
+
+Initialize astro environment
+
+>`astro dev init`
+
+Start astro environment
+
+>`astro dev start`
+
+Login credentials
+
+username: admin\
+password: admin
+
+>`astro dev parse`
+
+>`astro dev pytest`
+
+### General Commands
+
+*Running an airflow server*
+
+>`airflow webserver`
+
+username: airflow\
+password: airflow
+
+### Tutorial Commands
+
+*Running the script*
+
+>`python ~/airflow/dags/tutorial.py`
+
+*Command Line Metadata Validation*
+
+>`airflow db migrate`
+
+>`airflow dags list`
+
+>`airflow tasks list tutorial`
+
+>`airflow tasks list tutorial --tree`
+
+*Testing*
+
+>`airflow tasks test tutorial print_date 2015-06-01`
+
+>`airflow tasks test tutorial sleep 2015-06-01`
+
+*Testing templated*
+
+>`airflow tasks test tutorial templated 2015-06-01`

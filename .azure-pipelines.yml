@@ -1,0 +1,28 @@
+trigger:
+  branches:
+    - master
+    - merge_requests
+
+pool:
+  vmImage: "ubuntu-latest"
+
+stages:
+  - stage: Test_Astro
+    displayName: "Run Astro Tests"
+    jobs:
+      - job: RunTests
+        displayName: "Run Astro CLI Tests"
+        steps:
+          - script: |
+            echo "Installing astro CLI..."
+            curl -sSL https://install.astronomer.io | sudo bash
+            astro version
+            displayName: "Install Astro CLI"
+          - script: |
+            echo "Starting astro CLI..."
+            astro dev start
+            displayName: "Start astro environment"
+          - script: |
+            echo "Running astro tests..."
+            astro dev pytest tests/dags
+            displayName : "Run astro tests"

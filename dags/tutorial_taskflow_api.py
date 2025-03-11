@@ -1,6 +1,11 @@
+import logging
 import json
 import pendulum
 from airflow.decorators import dag, task
+
+
+logger = logging.getLogger(__file__)
+
 
 @dag(
     "taskflow_tutorial",
@@ -26,14 +31,16 @@ def tutorial_taskflow_api():
         pipeline. In this case, getting data is simulated by reading from a
         hardcoded JSON string.
         """
-        data_string = {
-            "1001": 301.27,
-            "1002": 433.21,
-            "1003": 502.22
-        }
-        order_data_dict = json.loads(data_string)
-        return order_data_dict
+        try:
+            data_string = {"1001": 301.27,"1002": 433.21,"1003": 502.22}
+            order_data_dict = json.loads(data_string)
+            return order_data_dict
 
+        except json.JSONDecodeError as exc:
+            logger.error(f"JSON decoding failed: {str(exc)}")
+        except Exception as exc:
+            logger.error(f"Unhandled exception: {str(exc)}")
+            
     @task(multiple_outputs=True)
     def transform(order_data_dict: dict):
         """

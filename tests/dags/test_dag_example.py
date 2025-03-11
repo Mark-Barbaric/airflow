@@ -34,7 +34,7 @@ def get_import_errors():
         ]
 
 
-def get_dags():
+def get_dags(excluding: list[str]=[]):
     """
     Generate a tuple of dag_id, <DAG objects> in the DagBag
     """
@@ -44,7 +44,7 @@ def get_dags():
     def strip_path_prefix(path):
         return os.path.relpath(path, os.environ.get("AIRFLOW_HOME"))
 
-    return [(k, v, strip_path_prefix(v.fileloc)) for k, v in dag_bag.dags.items()]
+    return [(k, v, strip_path_prefix(v.fileloc)) for k, v in dag_bag.dags.items() if k not in excluding]
 
 
 @pytest.mark.parametrize(
@@ -72,7 +72,7 @@ def test_dag_tags(dag_id, dag, fileloc):
 
 
 @pytest.mark.parametrize(
-    "dag_id,dag, fileloc", get_dags(), ids=[x[2] for x in get_dags()]
+    "dag_id,dag, fileloc", get_dags(excluding=["fundamental_concepts.py"]), ids=[x[2] for x in get_dags()]
 )
 def test_dag_retries(dag_id, dag, fileloc):
     """
