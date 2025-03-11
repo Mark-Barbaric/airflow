@@ -1,5 +1,24 @@
 ## Fundamental Concepts
 
+### Using Astro CLI
+
+Installation
+
+>`https://www.astronomer.io/docs/astro/cli/install-cli/?tab=linux#install-the-astro-cli`
+
+Initialize astro environment
+
+>`astro dev init`
+
+Start astro environment
+
+>`astro dev start`
+
+Login credentials
+
+username: admin\
+password: admin
+
 ### General Commands
 
 *Running an airflow server*
